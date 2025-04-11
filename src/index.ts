@@ -44,7 +44,7 @@ watcher.on('change', async (filePath) => {
   }
 
   try {
-    const testCode = await generateTestForFile(sourceCode, filePath);
+    const testCode = await generateTestForFile(changedLines, filePath);
     spinner.text = '📦 Comparing with existing test file...';
 
     const fileName = path.basename(filePath, '.ts');

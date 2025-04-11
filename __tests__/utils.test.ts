@@ -1,31 +1,49 @@
-import { sum, subtract, increment, dbConnection } from '../src/utils';
+import { getRandomNumber, getRandomString, getRandomBoolean } from '../src/utils';
 
-describe('sum function', () => {
-  it('should add two numbers correctly', () => {
-    expect(sum(2, 3)).toBe(5);
-    expect(sum(-1, 5)).toBe(4);
-    expect(sum(0, 0)).toBe(0);
+describe('utils', () => {
+  describe('getRandomNumber', () => {
+    it('should return a number between 0 and 99', () => {
+      const result = getRandomNumber();
+      expect(typeof result).toBe('number');
+      expect(result).toBeGreaterThanOrEqual(0);
+      expect(result).toBeLessThan(100);
+    });
   });
-});
 
-describe('subtract function', () => {
-  it('should subtract two numbers correctly', () => {
-    expect(subtract(5, 3)).toBe(2);
-    expect(subtract(10, 15)).toBe(-5);
-    expect(subtract(0, 0)).toBe(0);
+  describe('getRandomString', () => {
+    it('should return a random string', () => {
+      const result = getRandomString();
+      expect(typeof result).toBe('string');
+      expect(result.length).toBeGreaterThan(0);
+    });
+
+    it('should return different strings on subsequent calls', () => {
+      const result1 = getRandomString();
+      const result2 = getRandomString();
+      expect(result1).not.toBe(result2);
+    });
   });
-});
 
-describe('increment function', () => {
-  it('should increment a number by 1', () => {
-    expect(increment(5)).toBe(6);
-    expect(increment(-1)).toBe(0);
-    expect(increment(0)).toBe(1);
-  });
-});
+  describe('getRandomBoolean', () => {
+    it('should return a boolean value', () => {
+      const result = getRandomBoolean();
+      expect(typeof result).toBe('boolean');
+    });
 
-describe('dbConnection function', () => {
-  it('should return connection message', () => {
-    expect(dbConnection()).toBe('Connected to the database');
+    it('should eventually return both true and false', () => {
+      let hasTrue = false;
+      let hasFalse = false;
+      
+      // Test multiple times to ensure both values can occur
+      for (let i = 0; i < 20; i++) {
+        const result = getRandomBoolean();
+        if (result) hasTrue = true;
+        else hasFalse = true;
+        if (hasTrue && hasFalse) break;
+      }
+
+      expect(hasTrue).toBe(true);
+      expect(hasFalse).toBe(true);
+    });
   });
 });
