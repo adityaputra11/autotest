@@ -1,7 +1,7 @@
 import { OpenAI } from 'openai';
 
 const openai = new OpenAI({
-  apiKey: "sk-2f21e8ab30924c13bdbd79959fefd03c",  //YOUR API KEY HERE
+  apiKey: process.env.DEEPSEEK_API_KEY,  //YOUR API KEY HERE
   baseURL: 'https://api.deepseek.com',
 });
 
